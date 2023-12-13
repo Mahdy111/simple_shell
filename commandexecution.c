@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * execom - function that checks and executes the commands.
+ * execom - checks and executes the commands
  * @command: is the input string of the command to be executed.
  * @name: is the file name.
  * Return: void.

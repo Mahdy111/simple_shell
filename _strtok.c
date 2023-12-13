@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strtok - a function that tokenize the string given as an argument.
+ * _strtok - tokenize the string given as an argument
  * @str: is a string to be tokenized.
  * @deli: is a delimter.
  * Return:  pointer to the tokenized string.
