@@ -1,7 +1,8 @@
 #include "shell.h"
 /**
- *_getline - is function that takes input from the user and keeps on asking the user for input until he enters one.
- *Return: a pointer to the user input.
+ * _getline - is function that takes input from the user
+ * and keeps on asking the user for input until he enters one.
+ * Return: a pointer to the user input.
  */
 
 char *_getline(void)
