@@ -33,10 +33,7 @@ break;
 }
 execom(Userinput, argv[0]);
 }
-if (_strcmp(Userinput, "exit") != 0)
-{
 _putchar('\n');
-}
 free(Userinput);
 return (0);
 }

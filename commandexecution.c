@@ -41,6 +41,6 @@ return;
 }
 token1 = _strtok(NULL, ':');
 }
-error(token2, name);
+error(name);
 return;
 }

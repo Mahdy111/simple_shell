@@ -21,7 +21,7 @@ int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 void execom(char *command, char *name);
 int _strcmp(char *s1, char *s2);
-void error(char *str, char *name);
+void error(char *name);
 void env(void);
 void execute(char *str, char *path);
 extern char **environ;
