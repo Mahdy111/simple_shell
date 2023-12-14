@@ -2,15 +2,12 @@
 #define SHELL_H
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
-#include <math.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
-#include <signal.h>
+#include <errno.h>
 
 #define MAX_COMMAND 100
 #define MAX_ARGS 10
@@ -27,7 +24,5 @@ void execute(char *str, char *path);
 extern char **environ;
 int _putchar(char c);
 void echo(char *str);
-void dubfree(char **arrptr);
-char *full_path(char arr[], char *environ[]);
 
 #endif
