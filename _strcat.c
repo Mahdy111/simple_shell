@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * _strcat - concatenates two strings.
+ * _strcat - concatenates two strings
  * @dest: input first string.
  * @src: input second string.
  * Return: void.
