@@ -5,23 +5,10 @@
  * @name: is the file name.
  * Return: void.
  */
-void error(char *str, char *name)
+void error(char *name)
 {
-char *error2 = ": command not found\n";
-int i = 2;
-int b = 0;
-char *namefinal = malloc(_strlen(name) - 1);
+char *error2 = ": No such file or directory\n";
 
-while (name[i] != '\0')
-{
-namefinal[b] = name[i];
-i++;
-b++;
-}
-namefinal[b] = '\0';
-write(STDOUT_FILENO, namefinal, _strlen(namefinal));
-write(STDOUT_FILENO, ": ", _strlen(": "));
-write(STDOUT_FILENO, str, _strlen(str));
+write(STDOUT_FILENO, name, _strlen(name));
 write(STDOUT_FILENO, error2, _strlen(error2));
-free(namefinal);
 }
