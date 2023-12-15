@@ -1,46 +1,64 @@
 #include "shell.h"
 
-/**
- * execom - checks and executes the commands.
- * @command: is the input string of the command to be executed.
- * @name: is the file name.
- * Return: void.
- */
-void execom(char *command, char *name)
-{
-char *path = getenv("PATH");
-char *commandpath = NULL;
-char *token1;
-char *token2 = _strtok(command, ' ');
-char *error1 = "Failed to obtain PATH enviroment variable.\n";
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-if (path == NULL)
+/**
+ * executeCommand - execute commands
+ * @ptr: pointer value
+ * @environ: Environment variable.
+ * @array: Command.
+ * @buff: Buffer.
+ * @pt: Exit pointer
+ * @status: Status
+ * Return: Zero
+ */
+ 
+void executeCommand(char **ptr, char **environ, char **array, char *buff, int *pt, int status)
 {
-write(STDOUT_FILENO, error1, _strlen(error1));
-return;
-}
-token1 = _strtok(path, ':');
-while (token1 != NULL)
+pid_t pid;
+char errors[100];
+int i = 0, execs = 0;
+
+pid = fork(), execs++;
+if (pid == 0)
 {
-commandpath = _strcat(token1, "/");
-commandpath = _strcat(commandpath, token2);
-if (_strcmp(token2, "echo") == 0)
+	array[0] = full_path(array[0], environ);
+	if (execve(array[0], array, environ) == -1)
+	{	sprintf(errors, "%s: %d: %s: not found\n", ptr[0], execs, array[0]);
+		write(STDERR_FILENO, errors, _strlen(errors)), free(buff);
+		dubfree(array);
+		i = 0;
+		while (errors[i])
+			errors[i++] = 0;
+		exit(127);
+	}
+} else
+	wait(&status), dubfree(array);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+	*pt = WEXITSTATUS(status);
+	return (0);
+}
+
+/**
+ * dubfree - frees a double pointer
+ * @arrptr: pointer to be freed
+ */
+ 
+void dubfree(char **arrptr)
 {
-echo(command);
-return;
-}
-if (_strcmp(token2, "env") == 0)
-{
-env();
-return;
-}
-if (access(commandpath, F_OK) == 0)
-{
-execute(command, commandpath);
-return;
-}
-token1 = _strtok(NULL, ':');
-}
-error(name);
-return;
+	int i = 0;
+
+	while (arrptr[i])
+	{
+		free(arrptr[i]);
+		i++;
+	}
+	if (arrptr)
+		free(arrptr);
 }
